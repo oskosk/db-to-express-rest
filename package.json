@@ -21,6 +21,7 @@
     "supertest": "~0.15.0"
   },
   "scripts": {
+    "publishdocs": "git subtree push --prefix docs origin gh-pages",
     "test": "mocha"
   },
   "repository": {
