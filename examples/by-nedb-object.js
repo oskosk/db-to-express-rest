@@ -11,6 +11,6 @@ var s = new store({
   autoload: true
 });
 
-app.use(expressrest(s));
+app.use("/api", expressrest(s));
 
 app.listen(process.env.PORT || 3000);
