@@ -21,7 +21,7 @@
     "supertest": "~0.15.0"
   },
   "scripts": {
-    "publishdocs": "cp README.md docs/index.md && git commit docs/index.md -m 'Updated docs/index.md' && git subtree push --prefix docs origin gh-pages",
+    "publishdocs": "cp README.md docs/index.md && git commit docs/* -m 'Updated docs/' && git subtree push --prefix docs origin gh-pages",
     "test": "mocha"
   },
   "repository": {
