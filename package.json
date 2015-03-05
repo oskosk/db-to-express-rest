@@ -16,9 +16,12 @@
     "validator": "~3.33.0",
     "sprintf": "~0.1.5"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "mocha": "~2.1.0",
+    "supertest": "~0.15.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
