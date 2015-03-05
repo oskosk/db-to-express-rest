@@ -104,7 +104,7 @@ Pass the option `uri` to `dbtoexpress` to use a specific database in a MongoDB i
     }));
 
 
-## Validating data
+## Validating POSTs and PUTs
 
 Validating data is as simple as using a middleware like [express-form2](https://www.npmjs.com/package/express-form2).
 You just set a middleware prior to `app.use()`ing the router created by **db-to-express-rest**.
