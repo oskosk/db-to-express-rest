@@ -1,0 +1,43 @@
+{
+  "name": "db-to-express-rest",
+  "version": "1.0.0",
+  "description": "A module to create REST API routes on an [Express](http://expressjs.com) app automagically from MongoDB or NeDB database collections.",
+  "main": "lib",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {
+    "body-parser": "~1.10.2",
+    "debug": "~2.1.2",
+    "express": "~4.12.1",
+    "extend": "~2.0.0",
+    "nedb": "~1.1.1",
+    "monk": "~1.0.0",
+    "validator": "~3.33.0",
+    "sprintf": "~0.1.5"
+  },
+  "devDependencies": {
+    "mocha": "~2.1.0",
+    "supertest": "~0.15.0"
+  },
+  "scripts": {
+    "publishdocs": "git subtree push --prefix docs origin gh-pages",
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oskosk/db-to-express-rest"
+  },
+  "keywords": [
+    "express",
+    "nedb",
+    "mongodb",
+    "rest",
+    "api"
+  ],
+  "author": "osk <oskosk@gmail.com> (http://olopez.com.ar/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/oskosk/db-to-express-rest/issues"
+  }
+}
