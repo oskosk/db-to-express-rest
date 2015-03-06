@@ -12,7 +12,7 @@ with a simple one liner.
 
     
     var dbtoexpress = require("db-to-express-rest");
-    app.use("/api/", dbtoexpress("artists"));
+    app.use("/api", dbtoexpress("artists"));
 
 
 1. You call `dbtoexpress()` with a collection name.
@@ -42,10 +42,11 @@ kind of documents at once.
       app = express();
 
 
-     app.use(dbtoexpress("records"));
-     app.use(dbtoexpress("artists"));
-     app.use(dbtoexpress("genres"));
+     app.use("/api", dbtoexpress("records"));
+     app.use("/api", dbtoexpress("artists"));
+     app.use("/api", dbtoexpress("genres"));
 
+     app.listen(3000);
 
 ## Inner workings
 
@@ -87,10 +88,15 @@ pass the option `dbtype` to ` dbtoexpress()`.
       app = express();
 
 
-     app.use(dbtoexpress("records", {dbtype: "mongodb"}));
-     app.use(dbtoexpress("artists", {dbtype: "mongodb"}));
+    app.use("/api", dbtoexpress("records", {dbtype: "mongodb"}));
+    app.use("/api", dbtoexpress("artists", {dbtype: "mongodb"}));
+
+    app.listen(3000);
 
 _By default, it will connect to `localhost` and use (create) a database named `mydb`._
+
+* Of course you can pass **db-to-express-rest** your previously created `NeDB` file-based collections.
+
 
 See [API](#api) for more details on creation.
 
@@ -98,7 +104,7 @@ See [API](#api) for more details on creation.
 
 Pass the option `uri` to `dbtoexpress` to use a specific database in a MongoDB instance
 
-     app.use(dbtoexpress("records", {
+     app.use("/api", dbtoexpress("records", {
       dbtype: "mongodb",
       uri: "190.220.8.211/mydatabase"
     }));
@@ -125,7 +131,6 @@ on `req.body` so it will be as useful on a JOSN encoded body as with a URL encod
       }
     ]));
 
-## Creating a frontend to the API with AngularJS
 
 ## API
 
@@ -140,23 +145,23 @@ You specify a collection and options arguments to the main module function. For 
 
 **Arguments**
 
-* `collection` - **Required**. A **string** or an **object**. 
+* `collection` - **Required** - A **string** or an **object**. 
 
     {String} - If you provide a string, that string will be used as the **collection name**. If you're using NeDB,
 that will be the name of the file too. If you're using MongoDB, that will be
 the name of the collection.
 
-    {Object} - If you provide an **object** that is instance of a
-previously created collection (i.e. an instanceof `nedb()` or an instance of `monk.Collection`),
+    {Object} - If you provide  **an instanceof `nedb()`** or **an instance of `monk.Collection`**,
 it will be used as the exposed collection. The collection's name for the HTTP routes will be figured out by the
 filename if using **NeDB** or by the Mongo collection name used if you're using **MongoDB**. 
-* `options` - {Object}
+* `options` - **Optional** - {Object}
   * `dbtype` - {String} `'nedb'` or `'mongodb'`. _Only required if the 
   `collection` argument is a string._ **Default**: `'nedb'`.
-  * `uri` - {String} - Connection URI string for a MongoDB database. 
+  * `uri` - {String} - Connection URI string for a MongoDB database. The URI is
+a standard [MongDB MongoURI](https://api.mongodb.org/java/2.12/com/mongodb/MongoURI.html).
   * `filename` - {String} - a filename for NeDB storage. _Only used if using NeDB_.
   For example: `'190.220.8.121/mydatabase'`. **Default**: `'localhost/mydb'`.
-* `middleware` - {Array} Optional. An array of middleware that will be attachend
+* `middleware` - **Optional** - {Array} - An array of middleware that will be attachend
 on `POST` and `PUT` methods before saving changes.
 
 ### Exposed REST API
