@@ -1,3 +1,7 @@
+---
+layout: default
+---
+
 ## db-to-express-rest
  
 A module to create [Express 4](http://expressjs.com) **REST API routes** 
