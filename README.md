@@ -7,9 +7,7 @@ automagically from [MongoDB](http://www.mongodb.org/) or
 ## Overview
 
 **db-to-express-rest** allows you to create REST API routes for a document collection
-with a simple one liner. 
-
-
+with a simple one-liner. 
     
     var dbtoexpress = require("db-to-express-rest");
     app.use("/api/", dbtoexpress("artists"));
@@ -22,7 +20,7 @@ with a simple one liner.
 an HTTP REST interface for that document collection. 
 
 The call to `dbtoexpress()` returns an [express.Router](http://expressjs.com/4x/api.html#router) that is easy
-to `app.use()` on a regular **Express 4** app.
+to `app.use()` on your **Express 4** app.
 
 This means that **db-to-express-rest** generates the usual **REST API** methods
 for you to easily expose a document collection.
@@ -42,9 +40,9 @@ kind of documents at once.
       app = express();
 
 
-     app.use(dbtoexpress("records"));
-     app.use(dbtoexpress("artists"));
-     app.use(dbtoexpress("genres"));
+    app.use(dbtoexpress("records"));
+    app.use(dbtoexpress("artists"));
+    app.use(dbtoexpress("genres"));
 
 
 ## Inner workings
@@ -87,8 +85,8 @@ pass the option `dbtype` to ` dbtoexpress()`.
       app = express();
 
 
-     app.use(dbtoexpress("records", {dbtype: "mongodb"}));
-     app.use(dbtoexpress("artists", {dbtype: "mongodb"}));
+    app.use(dbtoexpress("records", {dbtype: "mongodb"}));
+    app.use(dbtoexpress("artists", {dbtype: "mongodb"}));
 
 _By default, it will connect to `localhost` and use (create) a database named `mydb`._
 
@@ -98,7 +96,7 @@ See [API](#api) for more details on creation.
 
 Pass the option `uri` to `dbtoexpress` to use a specific database in a MongoDB instance
 
-     app.use(dbtoexpress("records", {
+    app.use(dbtoexpress("records", {
       dbtype: "mongodb",
       uri: "190.220.8.211/mydatabase"
     }));
@@ -113,7 +111,9 @@ You may think that **expres-form2** is exclusive for form-submitted data but it 
 on `req.body` so it will be as useful on a JOSN encoded body as with a URL encoded one.
   
     validate = require("express-form2");
-    app.use("/api", expressrest("cars", {}, [validate(
+
+    app.use("/api", expressrest("cars", {}, [
+      validate(
         field("title").isNumeric(),
         field("content").required()
       ),
@@ -124,8 +124,6 @@ on `req.body` so it will be as useful on a JOSN encoded body as with a URL encod
         next();
       }
     ]));
-
-## Creating a frontend to the API with AngularJS
 
 ## API
 
@@ -158,6 +156,27 @@ filename if using **NeDB** or by the Mongo collection name used if you're using 
   For example: `'190.220.8.121/mydatabase'`. **Default**: `'localhost/mydb'`.
 * `middleware` - {Array} Optional. An array of middleware that will be attachend
 on `POST` and `PUT` methods before saving changes.
+
+**Returned value**
+
+The module creates an [express.Router()](http://expressjs.com/4x/api.html#router) and returns it. It also adds two properties
+to this object:
+
+* `collection`: {Object} - The collection object used for queries. 
+* `collectionName` - {String} - The collection name. This is also the collection name used
+for HTTP routes for the REST endpoints.
+
+**Example on using the extra properties on the returned value.**
+
+    var express = require("express"),
+      dbtoexpress = require("db-to-express-rest"),
+      app = express();
+
+    var dbroutes = dbtoexpress("records", {dbtype: "mongodb"});
+    app.use(dbroutes);
+
+    console.log("Exposing REST endpoints for collection %s", dbroutes.collectionName)
+
 
 ### Exposed REST API
 

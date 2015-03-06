@@ -1,7 +1,7 @@
 {
   "name": "db-to-express-rest",
   "version": "1.0.0",
-  "description": "A module to create REST API routes on an [Express](http://expressjs.com) app automagically from MongoDB or NeDB database collections.",
+  "description": "A module to create Express 4 REST API routes automagically from MongoDB or NeDB document collections.",
   "main": "lib",
   "directories": {
     "example": "example"
