@@ -22,7 +22,7 @@
   },
   "scripts": {
     "publishdocs": "cp README.md docs/index.md && git commit docs/ -m 'Updated docs/' && git subtree push --prefix docs origin gh-pages",
-    "test": "mocha"
+    "test": "cd test && mocha ."
   },
   "repository": {
     "type": "git",
