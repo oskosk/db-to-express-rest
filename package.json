@@ -1,7 +1,7 @@
 {
   "name": "db-to-express-rest",
-  "version": "1.0.0",
-  "description": "A module to create REST API routes on an [Express](http://expressjs.com) app automagically from MongoDB or NeDB database collections.",
+  "version": "1.1.0",
+  "description": "A module to create Express 4 REST API routes automagically from MongoDB or NeDB document collections.",
   "main": "lib",
   "directories": {
     "example": "example"
@@ -21,8 +21,8 @@
     "supertest": "~0.15.0"
   },
   "scripts": {
-    "publishdocs": "git subtree push --prefix docs origin gh-pages",
-    "test": "mocha"
+    "publishdocs": "cp README.md docs/index.md && git commit docs/ -m 'Updated docs/' && git subtree push --prefix docs origin gh-pages",
+    "test": "cd test && mocha ."
   },
   "repository": {
     "type": "git",
