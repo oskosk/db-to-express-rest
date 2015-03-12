@@ -156,8 +156,9 @@ filename if using **NeDB** or by the Mongo collection name used if you're using 
   `collection` argument is a string._ **Default**: `'nedb'`.
   * `uri` - {String} - Connection URI string for a MongoDB database. The URI is
 a standard [MongDB MongoURI](https://api.mongodb.org/java/2.12/com/mongodb/MongoURI.html).
-  * `filename` - {String} - a filename for NeDB storage. _Only used if using NeDB_.
-  For example: `'190.220.8.121/mydatabase'`. **Default**: `'localhost/mydb'`.
+  For example: `'190.220.8.121/mydatabase'`. **Default**: `'localhost/mydb'`. _Only valid if using mongodb_.
+  * `filename` - {String} - a filename for NeDB storage. _Only valid if using NeDB_. 
+**Default**: `join(process.cwd(), "db", "{collection}.db")`
 * `middleware` - **Optional** - {Array} - An array of middleware that will be attachend
 on `POST` and `PUT` methods before saving changes.
 
